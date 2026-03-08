@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Github, ExternalLink, GitCommit, Star, GitFork } from "lucide-react";
+import { Github, ExternalLink, GitCommit, Star, Code } from "lucide-react";
 
 interface GitHubData {
   publicRepos: number;
@@ -31,7 +31,6 @@ const GitHubSection = () => {
   const stats = [
     { icon: GitCommit, label: "Total Commits", value: ghData.totalCommits },
     { icon: Star, label: "Public Repos", value: String(ghData.publicRepos || "10+") },
-    { icon: GitFork, label: "Followers", value: String(ghData.followers || "5+") },
   ];
 
   return (
@@ -48,12 +47,12 @@ const GitHubSection = () => {
           <p className="text-muted-foreground mb-12">My open source contributions and coding activity.</p>
         </motion.div>
 
-        {/* Quick stats */}
+        {/* Quick stats - 2 columns */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.15 }}
-          className="grid grid-cols-3 gap-4 mb-8"
+          className="grid grid-cols-2 gap-6 mb-8 max-w-md mx-auto"
         >
           {stats.map((stat, i) => (
             <motion.div
@@ -61,12 +60,22 @@ const GitHubSection = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.2 + i * 0.1 }}
-              whileHover={{ y: -3 }}
-              className="glass-card p-4 text-center hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsla(217,92%,60%,0.15)]"
+              className="glass-card p-6 text-center cursor-default"
+              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-6px)";
+                e.currentTarget.style.boxShadow = "0 0 40px hsla(217,92%,60%,0.2)";
+                e.currentTarget.style.borderColor = "hsla(217,92%,60%,0.3)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "";
+              }}
             >
-              <stat.icon size={20} className="text-primary mx-auto mb-2" />
-              <div className="text-xl font-bold font-display gradient-text">{stat.value}</div>
-              <div className="text-[10px] text-muted-foreground mt-0.5">{stat.label}</div>
+              <stat.icon size={28} className="text-primary mx-auto mb-3" />
+              <div className="text-3xl font-bold font-display gradient-text">{stat.value}</div>
+              <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -92,22 +101,54 @@ const GitHubSection = () => {
 
           {/* Profile Summary Cards */}
           <div className="grid sm:grid-cols-2 gap-6">
-            <motion.div whileHover={{ y: -3 }} className="glass-card p-4 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsla(217,92%,60%,0.15)]">
+            <div 
+              className="glass-card p-5 overflow-hidden cursor-default"
+              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-6px)";
+                e.currentTarget.style.boxShadow = "0 0 40px hsla(217,92%,60%,0.2)";
+                e.currentTarget.style.borderColor = "hsla(217,92%,60%,0.3)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "";
+              }}
+            >
+              <h4 className="text-sm font-medium text-muted-foreground mb-3 flex items-center gap-2">
+                <Star size={14} className="text-primary" /> GitHub Stats
+              </h4>
               <img
                 src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=varshith3555&theme=tokyonight"
                 alt="GitHub Stats"
                 className="w-full rounded-lg"
                 loading="lazy"
               />
-            </motion.div>
-            <motion.div whileHover={{ y: -3 }} className="glass-card p-4 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsla(217,92%,60%,0.15)]">
+            </div>
+            <div 
+              className="glass-card p-5 overflow-hidden cursor-default"
+              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-6px)";
+                e.currentTarget.style.boxShadow = "0 0 40px hsla(217,92%,60%,0.2)";
+                e.currentTarget.style.borderColor = "hsla(217,92%,60%,0.3)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "";
+              }}
+            >
+              <h4 className="text-sm font-medium text-muted-foreground mb-3 flex items-center gap-2">
+                <Code size={14} className="text-primary" /> Top Languages
+              </h4>
               <img
                 src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=varshith3555&theme=tokyonight"
                 alt="Top Languages"
                 className="w-full rounded-lg"
                 loading="lazy"
               />
-            </motion.div>
+            </div>
           </div>
 
           {/* Profile link */}

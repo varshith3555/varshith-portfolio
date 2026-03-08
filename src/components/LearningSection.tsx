@@ -32,12 +32,22 @@ const LearningSection = () => {
               key={item.text}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.15 + i * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="glass-card p-5 hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsla(217,92%,60%,0.15)] group"
+              transition={{ delay: 0.1 + i * 0.05 }}
+              className="glass-card p-5 group cursor-default"
+              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-6px)";
+                e.currentTarget.style.boxShadow = "0 0 30px hsla(217,92%,60%,0.2)";
+                e.currentTarget.style.borderColor = "hsla(217,92%,60%,0.3)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "";
+              }}
             >
-              <item.icon size={20} className={`${item.color} mb-3 group-hover:scale-110 transition-transform duration-200`} />
-              <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
+              <item.icon size={20} className={`${item.color} mb-3 group-hover:scale-110 transition-transform duration-150`} />
+              <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-150 leading-relaxed">
                 {item.text}
               </p>
             </motion.div>
