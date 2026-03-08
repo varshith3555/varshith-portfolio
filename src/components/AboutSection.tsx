@@ -57,7 +57,7 @@ const AboutSection = () => {
         </motion.div>
 
         {/* Stats cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-32">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
