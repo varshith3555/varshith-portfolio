@@ -82,6 +82,20 @@
     transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   }
 
+  .glass-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 40px hsla(217, 92%, 60%, 0.2);
+    border-color: hsla(217, 92%, 60%, 0.3);
+  }
+
+  .section-divider {
+    background: linear-gradient(to bottom, hsl(var(--background)), hsla(217, 92%, 60%, 0.03), hsl(var(--background)));
+    height: 120px;
+    margin-top: -60px;
+    margin-bottom: -60px;
+    pointer-events: none;
+  }
+
   .gradient-text {
     background: var(--gradient-text);
     -webkit-background-clip: text;
