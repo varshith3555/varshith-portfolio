@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Download, ArrowDown } from "lucide-react";
 import { useState, useEffect } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/varshith3555", label: "GitHub" },
@@ -9,10 +15,10 @@ const socialLinks = [
 ];
 
 const titles = [
-  "Full Stack Developer",
   "Software Engineer",
+  "Full Stack Developer",
   "React Developer",
-  "Backend Engineer",
+  "Backend Developer",
 ];
 
 const techStack = [
@@ -62,37 +68,49 @@ const HeroSection = () => {
         <motion.div
           animate={{
             background: [
-              "radial-gradient(circle at 20% 50%, hsla(217,92%,60%,0.06) 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 50%, hsla(270,80%,65%,0.06) 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 80%, hsla(217,92%,60%,0.06) 0%, transparent 50%)",
-              "radial-gradient(circle at 20% 50%, hsla(217,92%,60%,0.06) 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 50%, hsla(217,92%,60%,0.07) 0%, transparent 50%)",
+              "radial-gradient(circle at 80% 50%, hsla(270,80%,65%,0.07) 0%, transparent 50%)",
+              "radial-gradient(circle at 50% 80%, hsla(217,92%,60%,0.07) 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 50%, hsla(217,92%,60%,0.07) 0%, transparent 50%)",
             ],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           className="absolute inset-0"
         />
+        {/* Secondary slow-moving glow */}
+        <motion.div
+          animate={{
+            background: [
+              "radial-gradient(circle at 70% 30%, hsla(270,80%,65%,0.04) 0%, transparent 40%)",
+              "radial-gradient(circle at 30% 70%, hsla(217,92%,60%,0.04) 0%, transparent 40%)",
+              "radial-gradient(circle at 70% 30%, hsla(270,80%,65%,0.04) 0%, transparent 40%)",
+            ],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0"
+        />
       </div>
 
       {/* Very subtle grid */}
-      <div className="absolute inset-0 opacity-[0.012]" style={{
+      <div className="absolute inset-0 opacity-[0.008]" style={{
         backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
         backgroundSize: '80px 80px'
       }} />
 
       {/* Floating particles */}
-      {[...Array(5)].map((_, i) => (
+      {[...Array(8)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 rounded-full bg-primary/20"
-          style={{ left: `${15 + i * 18}%`, top: `${20 + i * 12}%` }}
-          animate={{ y: [-20, 20, -20], opacity: [0.15, 0.5, 0.15] }}
-          transition={{ duration: 4 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+          className={`absolute rounded-full ${i % 3 === 0 ? 'w-1.5 h-1.5 bg-primary/15' : 'w-1 h-1 bg-accent/20'}`}
+          style={{ left: `${10 + i * 11}%`, top: `${15 + (i * 17) % 60}%` }}
+          animate={{ y: [-25, 25, -25], x: [-8, 8, -8], opacity: [0.1, 0.5, 0.1] }}
+          transition={{ duration: 4 + i * 0.7, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
         />
       ))}
 
       {/* Floating code elements */}
       <motion.div
-        animate={{ y: [-10, 10, -10] }}
+        animate={{ y: [-12, 12, -12], rotate: [-1, 1, -1] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-32 left-[10%] hidden lg:block"
       >
@@ -102,7 +120,7 @@ const HeroSection = () => {
       </motion.div>
 
       <motion.div
-        animate={{ y: [10, -10, 10] }}
+        animate={{ y: [12, -12, 12], rotate: [1, -1, 1] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-40 right-[8%] hidden lg:block"
       >
@@ -112,7 +130,7 @@ const HeroSection = () => {
       </motion.div>
 
       <motion.div
-        animate={{ y: [-8, 12, -8], x: [-5, 5, -5] }}
+        animate={{ y: [-8, 14, -8], x: [-6, 6, -6] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-48 right-[15%] hidden lg:block"
       >
@@ -121,12 +139,22 @@ const HeroSection = () => {
         </div>
       </motion.div>
 
+      <motion.div
+        animate={{ y: [10, -10, 10], x: [4, -4, 4] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-52 left-[12%] hidden lg:block"
+      >
+        <div className="glass-card !transform-none p-3 code-font text-xs text-muted-foreground">
+          <span className="text-primary">import</span> <span className="text-accent">{"{ code }"}</span>
+        </div>
+      </motion.div>
+
       <div className="section-container relative z-10 text-center">
         {/* Availability badge */}
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: "spring" }}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
           className="inline-flex items-center gap-2 glass-card !transform-none px-4 py-2 mb-8 text-sm text-muted-foreground"
         >
           <span className="relative flex h-2.5 w-2.5">
@@ -137,18 +165,18 @@ const HeroSection = () => {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-5xl sm:text-6xl lg:text-7xl font-bold font-display mb-4"
         >
           Varshith <span className="gradient-text">Reddy</span>
         </motion.h1>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          transition={{ delay: 0.5, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-xl sm:text-2xl text-muted-foreground mb-6 font-display h-9"
         >
           <span>{typedTitle}</span>
@@ -158,14 +186,14 @@ const HeroSection = () => {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
+          transition={{ delay: 0.7, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="max-w-2xl mx-auto text-muted-foreground mb-8 leading-relaxed"
         >
           Final-year Computer Science student passionate about building scalable web applications
           and solving complex problems.
         </motion.p>
 
-        {/* Tech stack badges — instant hover */}
+        {/* Tech stack badges — staggered entry */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -175,10 +203,10 @@ const HeroSection = () => {
           {techStack.map((tech, i) => (
             <motion.span
               key={tech.name}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.9 + i * 0.06 }}
-              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg hover:scale-[1.18] hover:-translate-y-1 hover:shadow-[0_0_24px_hsla(217,92%,60%,0.5)]`}
+              initial={{ opacity: 0, scale: 0.6, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.9 + i * 0.1, type: "spring", stiffness: 300, damping: 20 }}
+              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg hover:scale-[1.18] hover:-translate-y-1.5 hover:shadow-[0_0_28px_hsla(217,92%,60%,0.5)]`}
               style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease" }}
             >
               {tech.name}
@@ -195,52 +223,60 @@ const HeroSection = () => {
         >
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:shadow-[var(--shadow-glow)] hover:scale-105 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:shadow-[0_8px_30px_hsla(217,92%,60%,0.35)] hover:scale-105 hover:-translate-y-1 active:scale-[0.98] active:translate-y-0"
             style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease" }}
           >
-            View Projects
+            Explore Projects
           </a>
           <a
             href="/Varshith_Reddy_FullStack_Developer_Resume.pdf"
             download
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm border border-border text-foreground hover:bg-secondary hover:border-primary/30 hover:scale-105 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm border border-border text-foreground hover:bg-secondary hover:border-primary/30 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_hsla(217,92%,60%,0.15)] active:scale-[0.98] active:translate-y-0"
             style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease" }}
           >
             <Download size={16} /> Download Resume
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm border border-border text-foreground hover:bg-secondary hover:border-primary/30 hover:scale-105 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm border border-border text-foreground hover:bg-secondary hover:border-primary/30 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_hsla(217,92%,60%,0.15)] active:scale-[0.98] active:translate-y-0"
             style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease" }}
           >
             Contact Me
           </a>
         </motion.div>
 
-        {/* Social links */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="flex items-center justify-center gap-4"
-        >
-          {socialLinks.map((social, i) => (
-            <motion.a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={social.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3 + i * 0.08 }}
-              className="p-3 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 hover:shadow-[0_0_25px_hsla(217,92%,60%,0.25)] hover:-translate-y-1 hover:scale-110"
-              style={{ transition: "all 0.15s ease" }}
-            >
-              <social.icon size={20} />
-            </motion.a>
-          ))}
-        </motion.div>
+        {/* Social links with tooltips */}
+        <TooltipProvider delayDuration={200}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+            className="flex items-center justify-center gap-4"
+          >
+            {socialLinks.map((social, i) => (
+              <Tooltip key={social.label}>
+                <TooltipTrigger asChild>
+                  <motion.a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.3 + i * 0.1 }}
+                    className="p-3 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 hover:shadow-[0_0_25px_hsla(217,92%,60%,0.3)] hover:-translate-y-1.5 hover:scale-110"
+                    style={{ transition: "all 0.15s ease" }}
+                  >
+                    <social.icon size={20} />
+                  </motion.a>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" className="text-xs">
+                  {social.label}
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </motion.div>
+        </TooltipProvider>
 
         {/* Scroll indicator */}
         <motion.div
