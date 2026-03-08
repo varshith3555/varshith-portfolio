@@ -1,12 +1,11 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Phone, Download, ArrowDown } from "lucide-react";
+import { Github, Linkedin, Mail, Download, ArrowDown } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/varshith3555", label: "GitHub" },
   { icon: Linkedin, href: "https://linkedin.com/in/varshithreddy3/", label: "LinkedIn" },
   { icon: Mail, href: "mailto:varshithreddy661@gmail.com", label: "Email" },
-  { icon: Phone, href: "tel:+919347910680", label: "Phone" },
 ];
 
 const titles = [
