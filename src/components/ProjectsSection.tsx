@@ -56,18 +56,7 @@ const ProjectsSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1 + i * 0.15 }}
-              className="glass-card overflow-hidden group"
-              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-8px) scale(1.01)";
-                e.currentTarget.style.boxShadow = "0 0 60px hsla(217,92%,60%,0.25)";
-                e.currentTarget.style.borderColor = "hsla(217,92%,60%,0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.borderColor = "";
-              }}
+              className="glass-card overflow-hidden group cursor-default"
             >
               <div className="grid md:grid-cols-2">
                 {/* Image */}
@@ -76,16 +65,17 @@ const ProjectsSection = () => {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover group-hover:scale-110"
+                      style={{ transition: "transform 0.5s ease" }}
                       loading="lazy"
                     />
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/10 md:bg-gradient-to-r md:from-background md:via-background/50 md:to-background/10" />
-                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/20 md:bg-gradient-to-r md:from-background md:via-background/60 md:to-background/20" />
+
                   {/* Metrics overlay */}
                   <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2">
                     {project.metrics.map((m) => (
-                      <span key={m} className="text-[10px] px-2.5 py-1 rounded-full bg-background/80 text-primary backdrop-blur-md border border-primary/30 flex items-center gap-1 font-medium shadow-lg">
+                      <span key={m} className="text-[10px] px-2.5 py-1 rounded-full bg-background/90 text-primary backdrop-blur-md border border-primary/30 flex items-center gap-1 font-medium shadow-lg">
                         <Zap size={8} /> {m}
                       </span>
                     ))}
@@ -98,10 +88,9 @@ const ProjectsSection = () => {
                     <Calendar size={12} />
                     <span>{project.timeline}</span>
                   </div>
-                  <h3 className="text-xl font-bold font-display mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
+                  <h3 className="text-xl font-bold font-display mb-3 group-hover:text-primary" style={{ transition: "color 0.15s ease" }}>{project.title}</h3>
                   <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
 
-                  {/* Features */}
                   <ul className="grid grid-cols-2 gap-1.5 mb-4">
                     {project.features.map((f) => (
                       <li key={f} className="text-xs text-muted-foreground flex items-center gap-1.5">
@@ -111,37 +100,33 @@ const ProjectsSection = () => {
                     ))}
                   </ul>
 
-                  {/* Tech */}
                   <div className="flex flex-wrap gap-1.5 mb-6">
                     {project.tech.map((t) => (
-                      <span key={t} className="text-[11px] px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground border border-border/50 hover:border-primary/30 hover:text-primary transition-colors cursor-default">
+                      <span key={t} className="text-[11px] px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground border border-border/50 hover:border-primary/30 hover:text-primary cursor-default" style={{ transition: "all 0.15s ease" }}>
                         {t}
                       </span>
                     ))}
                   </div>
 
-                  {/* Buttons */}
                   <div className="flex gap-3">
-                    <motion.a
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
+                    <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm px-5 py-2.5 rounded-lg border border-border hover:bg-secondary hover:border-primary/30 transition-all duration-300"
+                      className="inline-flex items-center gap-2 text-sm px-5 py-2.5 rounded-lg border border-border hover:bg-secondary hover:border-primary/30 hover:scale-105 active:scale-[0.98]"
+                      style={{ transition: "all 0.15s ease" }}
                     >
                       <Github size={16} /> View Code
-                    </motion.a>
-                    <motion.a
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
+                    </a>
+                    <a
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm px-5 py-2.5 rounded-lg bg-primary text-primary-foreground hover:shadow-[var(--shadow-glow)] transition-all duration-300"
+                      className="inline-flex items-center gap-2 text-sm px-5 py-2.5 rounded-lg bg-primary text-primary-foreground hover:shadow-[var(--shadow-glow)] hover:scale-105 active:scale-[0.98]"
+                      style={{ transition: "all 0.15s ease" }}
                     >
                       <ExternalLink size={16} /> Live Demo
-                    </motion.a>
+                    </a>
                   </div>
                 </div>
               </div>

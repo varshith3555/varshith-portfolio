@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Phone, Download, ArrowDown, Code2 } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, Download, ArrowDown } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const socialLinks = [
@@ -32,7 +32,6 @@ const useTypingEffect = (texts: string[], typingSpeed = 80, deletingSpeed = 40, 
 
   useEffect(() => {
     const currentText = texts[textIndex];
-
     const timeout = setTimeout(() => {
       if (!isDeleting) {
         setDisplayText(currentText.slice(0, displayText.length + 1));
@@ -47,7 +46,6 @@ const useTypingEffect = (texts: string[], typingSpeed = 80, deletingSpeed = 40, 
         }
       }
     }, isDeleting ? deletingSpeed : typingSpeed);
-
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, textIndex, texts, typingSpeed, deletingSpeed, pauseTime]);
 
@@ -61,23 +59,23 @@ const HeroSection = () => {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated mesh gradient background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsla(217,92%,60%,0.15),_transparent_50%),radial-gradient(ellipse_at_bottom_left,_hsla(270,80%,65%,0.1),_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsla(217,92%,60%,0.12),_transparent_50%),radial-gradient(ellipse_at_bottom_left,_hsla(270,80%,65%,0.08),_transparent_50%)]" />
         <motion.div
-          animate={{ 
+          animate={{
             background: [
-              "radial-gradient(circle at 20% 50%, hsla(217,92%,60%,0.08) 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 50%, hsla(270,80%,65%,0.08) 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 80%, hsla(217,92%,60%,0.08) 0%, transparent 50%)",
-              "radial-gradient(circle at 20% 50%, hsla(217,92%,60%,0.08) 0%, transparent 50%)",
-            ]
+              "radial-gradient(circle at 20% 50%, hsla(217,92%,60%,0.06) 0%, transparent 50%)",
+              "radial-gradient(circle at 80% 50%, hsla(270,80%,65%,0.06) 0%, transparent 50%)",
+              "radial-gradient(circle at 50% 80%, hsla(217,92%,60%,0.06) 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 50%, hsla(217,92%,60%,0.06) 0%, transparent 50%)",
+            ],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           className="absolute inset-0"
         />
       </div>
 
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.015]" style={{
+      {/* Very subtle grid */}
+      <div className="absolute inset-0 opacity-[0.012]" style={{
         backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
         backgroundSize: '80px 80px'
       }} />
@@ -86,12 +84,9 @@ const HeroSection = () => {
       {[...Array(5)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 rounded-full bg-primary/30"
+          className="absolute w-1 h-1 rounded-full bg-primary/20"
           style={{ left: `${15 + i * 18}%`, top: `${20 + i * 12}%` }}
-          animate={{
-            y: [-20, 20, -20],
-            opacity: [0.2, 0.6, 0.2],
-          }}
+          animate={{ y: [-20, 20, -20], opacity: [0.15, 0.5, 0.15] }}
           transition={{ duration: 4 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
         />
       ))}
@@ -102,17 +97,17 @@ const HeroSection = () => {
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-32 left-[10%] hidden lg:block"
       >
-        <div className="glass-card p-3 code-font text-xs text-muted-foreground">
+        <div className="glass-card !transform-none p-3 code-font text-xs text-muted-foreground">
           <span className="text-primary">const</span> developer = <span className="text-accent">"Varshith"</span>;
         </div>
       </motion.div>
-      
+
       <motion.div
         animate={{ y: [10, -10, 10] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-40 right-[8%] hidden lg:block"
       >
-        <div className="glass-card p-3 code-font text-xs text-muted-foreground">
+        <div className="glass-card !transform-none p-3 code-font text-xs text-muted-foreground">
           <span className="text-accent">{"{ }"}</span> Full Stack Dev
         </div>
       </motion.div>
@@ -122,7 +117,7 @@ const HeroSection = () => {
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-48 right-[15%] hidden lg:block"
       >
-        <div className="glass-card p-3 code-font text-xs text-muted-foreground">
+        <div className="glass-card !transform-none p-3 code-font text-xs text-muted-foreground">
           <span className="text-primary">async</span> <span className="text-accent">build</span>() {"{ }"}
         </div>
       </motion.div>
@@ -133,7 +128,7 @@ const HeroSection = () => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring" }}
-          className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-8 text-sm text-muted-foreground"
+          className="inline-flex items-center gap-2 glass-card !transform-none px-4 py-2 mb-8 text-sm text-muted-foreground"
         >
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
@@ -142,7 +137,6 @@ const HeroSection = () => {
           <span>Available for opportunities</span>
         </motion.div>
 
-        {/* Name */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -152,7 +146,6 @@ const HeroSection = () => {
           Varshith <span className="gradient-text">Reddy</span>
         </motion.h1>
 
-        {/* Typing title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -163,7 +156,6 @@ const HeroSection = () => {
           <span className="inline-block w-0.5 h-6 bg-primary ml-1 animate-pulse align-middle" />
         </motion.div>
 
-        {/* Tagline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -174,7 +166,7 @@ const HeroSection = () => {
           and solving complex problems.
         </motion.p>
 
-        {/* Tech stack badges */}
+        {/* Tech stack badges — instant hover */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -186,17 +178,9 @@ const HeroSection = () => {
               key={tech.name}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.9 + i * 0.08 }}
-              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg`}
+              transition={{ delay: 0.9 + i * 0.06 }}
+              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg hover:scale-[1.18] hover:-translate-y-1 hover:shadow-[0_0_24px_hsla(217,92%,60%,0.5)]`}
               style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.18) translateY(-4px)";
-                e.currentTarget.style.boxShadow = "0 0 24px hsla(217,92%,60%,0.5)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1) translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
             >
               {tech.name}
             </motion.span>
@@ -210,31 +194,28 @@ const HeroSection = () => {
           transition={{ delay: 1, duration: 0.6 }}
           className="flex flex-wrap items-center justify-center gap-4 mb-12"
         >
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
+          <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:shadow-[var(--shadow-glow)] transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:shadow-[var(--shadow-glow)] hover:scale-105 active:scale-[0.98]"
+            style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease" }}
           >
             View Projects
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
+          </a>
+          <a
             href="/Varshith_Reddy_FullStack_Developer_Resume.pdf"
             download
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm border border-border text-foreground hover:bg-secondary hover:border-primary/30 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm border border-border text-foreground hover:bg-secondary hover:border-primary/30 hover:scale-105 active:scale-[0.98]"
+            style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease" }}
           >
             <Download size={16} /> Download Resume
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
+          </a>
+          <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm border border-border text-foreground hover:bg-secondary hover:border-primary/30 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm border border-border text-foreground hover:bg-secondary hover:border-primary/30 hover:scale-105 active:scale-[0.98]"
+            style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease" }}
           >
             Contact Me
-          </motion.a>
+          </a>
         </motion.div>
 
         {/* Social links */}
@@ -251,11 +232,11 @@ const HeroSection = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.label}
-              whileHover={{ scale: 1.15, y: -3 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3 + i * 0.1 }}
-              className="p-3 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_25px_hsla(217,92%,60%,0.25)] hover:bg-primary/5"
+              transition={{ delay: 1.3 + i * 0.08 }}
+              className="p-3 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 hover:shadow-[0_0_25px_hsla(217,92%,60%,0.25)] hover:-translate-y-1 hover:scale-110"
+              style={{ transition: "all 0.15s ease" }}
             >
               <social.icon size={20} />
             </motion.a>
@@ -269,14 +250,14 @@ const HeroSection = () => {
           transition={{ delay: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
             <ArrowDown size={20} className="text-muted-foreground" />
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Bottom gradient blend into next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-background pointer-events-none" />
     </section>
   );
 };

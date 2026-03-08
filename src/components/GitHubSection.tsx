@@ -34,8 +34,13 @@ const GitHubSection = () => {
   ];
 
   return (
-    <section id="github" ref={ref}>
-      <div className="section-container">
+    <section id="github" ref={ref} className="relative">
+      {/* Background glow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/[0.04] rounded-full blur-3xl" />
+      </div>
+
+      <div className="section-container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -47,7 +52,7 @@ const GitHubSection = () => {
           <p className="text-muted-foreground mb-12">My open source contributions and coding activity.</p>
         </motion.div>
 
-        {/* Quick stats - 2 columns */}
+        {/* Row 1: Quick stats */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -61,17 +66,6 @@ const GitHubSection = () => {
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.2 + i * 0.1 }}
               className="glass-card p-6 text-center cursor-default"
-              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-6px)";
-                e.currentTarget.style.boxShadow = "0 0 40px hsla(217,92%,60%,0.2)";
-                e.currentTarget.style.borderColor = "hsla(217,92%,60%,0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.borderColor = "";
-              }}
             >
               <stat.icon size={28} className="text-primary mx-auto mb-3" />
               <div className="text-3xl font-bold font-display gradient-text">{stat.value}</div>
@@ -86,8 +80,8 @@ const GitHubSection = () => {
           transition={{ delay: 0.2 }}
           className="grid gap-6"
         >
-          {/* Contribution graph */}
-          <div className="glass-card p-6 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsla(217,92%,60%,0.15)]">
+          {/* Row 2: Contribution graph */}
+          <div className="glass-card p-6 overflow-hidden cursor-default">
             <h3 className="text-sm font-semibold mb-4 flex items-center gap-2">
               <Github size={16} className="text-primary" /> Contribution Graph
             </h3>
@@ -99,22 +93,9 @@ const GitHubSection = () => {
             />
           </div>
 
-          {/* Profile Summary Cards */}
+          {/* Row 3: Stats + Languages */}
           <div className="grid sm:grid-cols-2 gap-6">
-            <div 
-              className="glass-card p-5 overflow-hidden cursor-default"
-              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-6px)";
-                e.currentTarget.style.boxShadow = "0 0 40px hsla(217,92%,60%,0.2)";
-                e.currentTarget.style.borderColor = "hsla(217,92%,60%,0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.borderColor = "";
-              }}
-            >
+            <div className="glass-card p-5 overflow-hidden cursor-default">
               <h4 className="text-sm font-medium text-muted-foreground mb-3 flex items-center gap-2">
                 <Star size={14} className="text-primary" /> GitHub Stats
               </h4>
@@ -125,20 +106,7 @@ const GitHubSection = () => {
                 loading="lazy"
               />
             </div>
-            <div 
-              className="glass-card p-5 overflow-hidden cursor-default"
-              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-6px)";
-                e.currentTarget.style.boxShadow = "0 0 40px hsla(217,92%,60%,0.2)";
-                e.currentTarget.style.borderColor = "hsla(217,92%,60%,0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.borderColor = "";
-              }}
-            >
+            <div className="glass-card p-5 overflow-hidden cursor-default">
               <h4 className="text-sm font-medium text-muted-foreground mb-3 flex items-center gap-2">
                 <Code size={14} className="text-primary" /> Top Languages
               </h4>
@@ -153,16 +121,15 @@ const GitHubSection = () => {
 
           {/* Profile link */}
           <div className="text-center">
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
+            <a
               href="https://github.com/varshith3555"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-sm hover:bg-secondary hover:border-primary/30 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-sm hover:bg-secondary hover:border-primary/30 hover:scale-105 active:scale-[0.98]"
+              style={{ transition: "all 0.15s ease" }}
             >
               <Github size={18} /> View Full GitHub Profile <ExternalLink size={14} />
-            </motion.a>
+            </a>
           </div>
         </motion.div>
       </div>
