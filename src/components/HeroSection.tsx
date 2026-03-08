@@ -203,19 +203,18 @@ const HeroSection = () => {
           transition={{ delay: 0.8, duration: 0.6 }}
           className="flex flex-wrap items-center justify-center gap-2 mb-10"
         >
-          {techStack.map((tech, i) => (
-            <motion.span
-              key={tech.name}
-              initial={{ opacity: 0, scale: 0.6, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.9 + i * 0.1, type: "spring", stiffness: 300, damping: 20 }}
-              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg hover:brightness-110`}
-              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease" }}
-              whileHover={{ scale: 1.08, y: -3, boxShadow: `0 0 24px ${tech.glow}` }}
-            >
-              {tech.name}
-            </motion.span>
-          ))}
+           {techStack.map((tech, i) => (
+             <motion.span
+               key={tech.name}
+               initial={{ opacity: 0, scale: 0.6, y: 10 }}
+               animate={{ opacity: 1, scale: 1, y: 0 }}
+               transition={{ delay: 0.9 + i * 0.1, type: "spring", stiffness: 300, damping: 20 }}
+               className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg hover:brightness-110 transition-transform duration-150 ease-out hover:scale-105 hover:-translate-y-1`}
+               whileHover={{ boxShadow: `0 0 24px ${tech.glow}` }}
+             >
+               {tech.name}
+             </motion.span>
+           ))}
         </motion.div>
 
         {/* Buttons */}
