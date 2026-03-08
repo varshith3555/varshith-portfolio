@@ -21,8 +21,13 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" ref={ref}>
-      <div className="section-container">
+    <section id="contact" ref={ref} className="relative">
+      {/* Background depth */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute bottom-0 left-1/3 w-[600px] h-[400px] bg-primary/[0.04] rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-accent/[0.03] rounded-full blur-[120px]" />
+      </div>
+      <div className="section-container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
