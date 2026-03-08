@@ -22,12 +22,12 @@ const titles = [
 ];
 
 const techStack = [
-  { name: "React", color: "from-[hsl(195,100%,40%)] to-[hsl(195,80%,55%)]" },
-  { name: "Node.js", color: "from-[hsl(120,40%,35%)] to-[hsl(120,50%,50%)]" },
-  { name: "ASP.NET", color: "from-[hsl(270,60%,50%)] to-[hsl(270,70%,65%)]" },
-  { name: "MongoDB", color: "from-[hsl(145,60%,35%)] to-[hsl(145,50%,50%)]" },
-  { name: "SQL Server", color: "from-[hsl(0,70%,45%)] to-[hsl(0,60%,60%)]" },
-  { name: "TypeScript", color: "from-[hsl(211,60%,45%)] to-[hsl(211,70%,60%)]" },
+  { name: "React", color: "from-[hsl(195,100%,40%)] to-[hsl(195,80%,55%)]", glow: "hsla(195,100%,50%,0.5)" },
+  { name: "Node.js", color: "from-[hsl(120,40%,35%)] to-[hsl(120,50%,50%)]", glow: "hsla(120,50%,45%,0.5)" },
+  { name: "ASP.NET", color: "from-[hsl(270,60%,50%)] to-[hsl(270,70%,65%)]", glow: "hsla(270,70%,60%,0.5)" },
+  { name: "MongoDB", color: "from-[hsl(145,60%,35%)] to-[hsl(145,50%,50%)]", glow: "hsla(145,60%,45%,0.5)" },
+  { name: "SQL Server", color: "from-[hsl(0,70%,45%)] to-[hsl(0,60%,60%)]", glow: "hsla(0,70%,55%,0.5)" },
+  { name: "TypeScript", color: "from-[hsl(211,60%,45%)] to-[hsl(211,70%,60%)]", glow: "hsla(211,70%,55%,0.5)" },
 ];
 
 const useTypingEffect = (texts: string[], typingSpeed = 80, deletingSpeed = 40, pauseTime = 2000) => {
@@ -92,10 +92,13 @@ const HeroSection = () => {
       </div>
 
       {/* Very subtle grid */}
-      <div className="absolute inset-0 opacity-[0.008]" style={{
+      <div className="absolute inset-0 opacity-[0.005]" style={{
         backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
         backgroundSize: '80px 80px'
       }} />
+
+      {/* Radial glow behind hero name */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-[600px] h-[400px] bg-[radial-gradient(ellipse,_hsla(217,92%,60%,0.08)_0%,_hsla(270,80%,65%,0.04)_40%,_transparent_70%)] pointer-events-none" />
 
       {/* Floating particles */}
       {[...Array(8)].map((_, i) => (
@@ -206,8 +209,9 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.6, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.9 + i * 0.1, type: "spring", stiffness: 300, damping: 20 }}
-              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg hover:scale-[1.18] hover:-translate-y-1.5 hover:shadow-[0_0_28px_hsla(217,92%,60%,0.5)]`}
+              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg`}
               style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease" }}
+              whileHover={{ scale: 1.12, y: -4, boxShadow: `0 0 24px ${tech.glow}` }}
             >
               {tech.name}
             </motion.span>
@@ -223,7 +227,7 @@ const HeroSection = () => {
         >
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm bg-primary text-primary-foreground hover:shadow-[0_8px_30px_hsla(217,92%,60%,0.35)] hover:scale-105 hover:-translate-y-1 active:scale-[0.98] active:translate-y-0"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-lg font-medium text-sm bg-gradient-to-r from-primary to-[hsl(270,80%,60%)] text-primary-foreground shadow-[0_4px_20px_hsla(217,92%,60%,0.25)] hover:shadow-[0_8px_35px_hsla(217,92%,60%,0.45)] hover:scale-105 hover:-translate-y-1.5 active:scale-[0.98] active:translate-y-0"
             style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease" }}
           >
             Explore Projects
