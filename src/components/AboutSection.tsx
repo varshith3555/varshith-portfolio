@@ -57,7 +57,7 @@ const AboutSection = () => {
         </motion.div>
 
         {/* Stats cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-32">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -86,11 +86,15 @@ const AboutSection = () => {
           ))}
         </div>
 
+        {/* Section Divider */}
+        <div className="my-12 h-px bg-gradient-to-r from-transparent via-border to-transparent opacity-40" />
+
         {/* Education */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
+          className="pt-8"
         >
           <h3 className="text-xl font-semibold font-display mb-6 flex items-center gap-2">
             <GraduationCap size={22} className="text-primary" /> Education
