@@ -3,7 +3,7 @@
 This is my personal developer portfolio showcasing my projects, skills, and experience as a Full Stack Developer.
 
 ## Live Website
-🔗 https://your-vercel-url.vercel.app
+🔗 https://varshithdev.vercel.app/
 
 ## About the Project
 This portfolio highlights my work, technical skills, GitHub activity, and projects I have built.  
