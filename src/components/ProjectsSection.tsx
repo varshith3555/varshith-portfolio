@@ -55,9 +55,19 @@ const ProjectsSection = () => {
               key={project.title}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 + i * 0.2 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="glass-card overflow-hidden group hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_60px_hsla(217,92%,60%,0.2)]"
+              transition={{ delay: 0.1 + i * 0.15 }}
+              className="glass-card overflow-hidden group"
+              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-8px) scale(1.01)";
+                e.currentTarget.style.boxShadow = "0 0 60px hsla(217,92%,60%,0.25)";
+                e.currentTarget.style.borderColor = "hsla(217,92%,60%,0.3)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0) scale(1)";
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "";
+              }}
             >
               <div className="grid md:grid-cols-2">
                 {/* Image */}
