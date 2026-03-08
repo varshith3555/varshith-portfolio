@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Github, Calendar } from "lucide-react";
+import { ExternalLink, Github, Calendar, Zap } from "lucide-react";
 import chatAppPreview from "@/assets/chat-app-preview.jpg";
 import recipeAppPreview from "@/assets/recipe-app-preview.jpg";
 
@@ -11,6 +11,7 @@ const projects = [
       "Architected a real-time messaging platform using WebSockets enabling scalable multi-user chat with minimal latency. Implemented group chats, dynamic file uploads with Cloudinary, and JWT authentication for secure messaging.",
     tech: ["JavaScript", "React.js", "Node.js", "Express.js", "MongoDB", "Socket.io", "Cloudinary", "JWT"],
     features: ["Real-time messaging", "Group chats", "Image sharing", "Secure authentication"],
+    metrics: ["< 50ms latency", "Multi-user scalable", "Secure JWT auth"],
     timeline: "Apr 2025 – May 2025",
     image: chatAppPreview,
     github: "https://github.com/varshith3555",
@@ -22,6 +23,7 @@ const projects = [
       "Built a scalable recipe management platform where users can browse, add, and save recipes dynamically. Optimized rendering using React Hooks and implemented lazy loading for improved performance.",
     tech: ["HTML", "CSS", "React.js"],
     features: ["Recipe browsing", "Search and filtering", "Responsive UI", "Lazy loading optimization"],
+    metrics: ["60% faster rendering", "Optimized performance", "Responsive design"],
     timeline: "Nov 2024 – Dec 2024",
     image: recipeAppPreview,
     github: "https://github.com/varshith3555",
@@ -54,18 +56,30 @@ const ProjectsSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 + i * 0.2 }}
-              className="glass-card overflow-hidden group hover:border-primary/30 transition-all duration-300"
+              whileHover={{ y: -4 }}
+              className="glass-card overflow-hidden group hover:border-primary/30 transition-all duration-500 hover:shadow-[0_0_60px_hsla(217,92%,60%,0.12)]"
             >
               <div className="grid md:grid-cols-2">
                 {/* Image */}
                 <div className="relative overflow-hidden aspect-video md:aspect-auto">
-                  <img
+                  <motion.img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.6 }}
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent md:bg-gradient-to-r" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent md:bg-gradient-to-r" />
+                  
+                  {/* Metrics overlay */}
+                  <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2">
+                    {project.metrics.map((m) => (
+                      <span key={m} className="text-[10px] px-2 py-1 rounded-full bg-primary/20 text-primary backdrop-blur-md border border-primary/20 flex items-center gap-1">
+                        <Zap size={8} /> {m}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Content */}
@@ -74,14 +88,14 @@ const ProjectsSection = () => {
                     <Calendar size={12} />
                     <span>{project.timeline}</span>
                   </div>
-                  <h3 className="text-xl font-bold font-display mb-3">{project.title}</h3>
+                  <h3 className="text-xl font-bold font-display mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
                   <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
 
                   {/* Features */}
-                  <ul className="grid grid-cols-2 gap-1 mb-4">
+                  <ul className="grid grid-cols-2 gap-1.5 mb-4">
                     {project.features.map((f) => (
                       <li key={f} className="text-xs text-muted-foreground flex items-center gap-1.5">
-                        <span className="w-1 h-1 rounded-full bg-primary" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                         {f}
                       </li>
                     ))}
@@ -90,7 +104,7 @@ const ProjectsSection = () => {
                   {/* Tech */}
                   <div className="flex flex-wrap gap-1.5 mb-6">
                     {project.tech.map((t) => (
-                      <span key={t} className="text-[11px] px-2 py-1 rounded-full bg-secondary text-secondary-foreground">
+                      <span key={t} className="text-[11px] px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground border border-border/50 hover:border-primary/30 hover:text-primary transition-colors cursor-default">
                         {t}
                       </span>
                     ))}
@@ -98,22 +112,26 @@ const ProjectsSection = () => {
 
                   {/* Buttons */}
                   <div className="flex gap-3">
-                    <a
+                    <motion.a
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg border border-border hover:bg-secondary transition-colors"
+                      className="inline-flex items-center gap-2 text-sm px-5 py-2.5 rounded-lg border border-border hover:bg-secondary hover:border-primary/30 transition-all duration-300"
                     >
                       <Github size={16} /> View Code
-                    </a>
-                    <a
+                    </motion.a>
+                    <motion.a
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+                      className="inline-flex items-center gap-2 text-sm px-5 py-2.5 rounded-lg bg-primary text-primary-foreground hover:shadow-[var(--shadow-glow)] transition-all duration-300"
                     >
                       <ExternalLink size={16} /> Live Demo
-                    </a>
+                    </motion.a>
                   </div>
                 </div>
               </div>

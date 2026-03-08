@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Award, Calendar, Users } from "lucide-react";
+import { Award, Calendar, Users, Heart, Star, ChevronRight } from "lucide-react";
 
 const experiences = [
   {
@@ -8,23 +8,27 @@ const experiences = [
     org: "Mind Over Matter – Analytical Club, LPU",
     period: "Apr 2025 – Present",
     responsibilities: [
-      "Leading analytical initiatives",
-      "Organizing workshops",
-      "Mentoring students",
+      "Leading analytical initiatives across the university",
+      "Organizing workshops and hackathons",
+      "Mentoring 50+ students in problem-solving",
       "Coordinating with faculty and club members",
     ],
     icon: Award,
+    highlight: "Current Role",
+    color: "from-primary to-accent",
   },
   {
     title: "Event Coordinator",
     org: "Mind Over Matter – Analytical Club, LPU",
     period: "Sep 2024 – Mar 2025",
     responsibilities: [
-      "Coordinated academic events",
-      "Managed participant communication",
-      "Handled event logistics",
+      "Coordinated 10+ academic events",
+      "Managed participant communication for 200+ attendees",
+      "Handled event logistics and planning",
     ],
-    icon: Users,
+    icon: Star,
+    highlight: "10+ Events",
+    color: "from-[hsl(30,80%,50%)] to-[hsl(15,90%,55%)]",
   },
   {
     title: "NSS Volunteer",
@@ -34,7 +38,9 @@ const experiences = [
       "Participated in community outreach programs",
       "Promoted social awareness initiatives",
     ],
-    icon: Users,
+    icon: Heart,
+    highlight: "Community Service",
+    color: "from-[hsl(340,70%,50%)] to-[hsl(320,60%,55%)]",
   },
 ];
 
@@ -57,43 +63,58 @@ const ExperienceSection = () => {
         </motion.div>
 
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-4 top-0 bottom-0 w-px bg-border hidden sm:block" />
+          {/* Timeline line with gradient */}
+          <div className="absolute left-[18px] top-0 bottom-0 w-px bg-gradient-to-b from-primary via-accent to-transparent hidden sm:block" />
 
-          <div className="grid gap-6">
+          <div className="grid gap-8">
             {experiences.map((exp, i) => (
               <motion.div
                 key={exp.title + exp.period}
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -40 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.2 + i * 0.15 }}
-                className="sm:pl-12 relative"
+                transition={{ delay: 0.2 + i * 0.2 }}
+                className="sm:pl-14 relative"
               >
-                {/* Dot */}
-                <div className="hidden sm:block absolute left-2.5 top-6 w-3 h-3 rounded-full border-2 border-primary bg-background" />
+                {/* Timeline dot with glow */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={inView ? { scale: 1 } : {}}
+                  transition={{ delay: 0.3 + i * 0.2, type: "spring" }}
+                  className={`hidden sm:flex absolute left-1 top-6 w-[22px] h-[22px] rounded-full bg-gradient-to-br ${exp.color} items-center justify-center shadow-[0_0_15px_hsla(217,92%,60%,0.3)]`}
+                >
+                  <div className="w-2 h-2 rounded-full bg-background" />
+                </motion.div>
 
-                <div className="glass-card p-6 hover:border-primary/30 transition-all duration-300">
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0">
-                      <exp.icon size={18} />
+                <motion.div
+                  whileHover={{ x: 6 }}
+                  className="glass-card p-6 hover:border-primary/30 transition-all duration-300 hover:shadow-[var(--shadow-glow)]"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className={`p-2.5 rounded-xl bg-gradient-to-br ${exp.color} shrink-0`}>
+                      <exp.icon size={18} className="text-primary-foreground" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold font-display">{exp.title}</h3>
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <h3 className="font-semibold font-display text-lg">{exp.title}</h3>
+                        <span className={`text-[10px] px-2.5 py-0.5 rounded-full bg-gradient-to-r ${exp.color} text-primary-foreground font-medium`}>
+                          {exp.highlight}
+                        </span>
+                      </div>
                       <p className="text-sm text-muted-foreground">{exp.org}</p>
                       <span className="inline-flex items-center gap-1 text-xs text-primary mt-1">
                         <Calendar size={11} /> {exp.period}
                       </span>
-                      <ul className="mt-3 space-y-1.5">
+                      <ul className="mt-4 space-y-2">
                         {exp.responsibilities.map((r) => (
-                          <li key={r} className="text-sm text-muted-foreground flex items-start gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                          <li key={r} className="text-sm text-muted-foreground flex items-start gap-2 group/item">
+                            <ChevronRight size={14} className="text-primary mt-0.5 shrink-0 group-hover/item:translate-x-0.5 transition-transform" />
                             {r}
                           </li>
                         ))}
                       </ul>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
