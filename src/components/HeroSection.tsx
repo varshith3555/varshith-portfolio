@@ -209,10 +209,9 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.6, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.9 + i * 0.1, type: "spring", stiffness: 300, damping: 20 }}
-              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg hover:scale-[1.08] hover:-translate-y-1`}
-              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease", ["--glow" as string]: tech.glow }}
-              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 0 22px ${tech.glow}`; }}
-              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = ''; }}
+              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg`}
+              style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease" }}
+              whileHover={{ scale: 1.12, y: -4, boxShadow: `0 0 24px ${tech.glow}` }}
             >
               {tech.name}
             </motion.span>
