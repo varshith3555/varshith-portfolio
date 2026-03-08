@@ -35,14 +35,14 @@ const SkillsSection = () => {
           <p className="text-muted-foreground mb-12">Technologies and tools I work with.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {skillCategories.map((cat, i) => (
             <motion.div
               key={cat.title}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.05 + i * 0.05 }}
-              className="glass-card p-6 group cursor-default"
+              className="glass-card p-7 group cursor-default"
             >
               <div className="flex items-center gap-3 mb-5">
                 <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors duration-150">

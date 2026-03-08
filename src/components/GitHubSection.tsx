@@ -86,7 +86,7 @@ const GitHubSection = () => {
               <Github size={16} className="text-primary" /> Contribution Graph
             </h3>
             <img
-              src="https://ghchart.rshah.org/4f8cf5/varshith3555"
+              src="https://ghchart.rshah.org/40c463/varshith3555"
               alt="GitHub Contribution Graph"
               className="w-full rounded-lg"
               loading="lazy"

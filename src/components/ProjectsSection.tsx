@@ -2,7 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ExternalLink, Github, Calendar, Zap } from "lucide-react";
 import chatAppPreview from "@/assets/chat-app-preview.jpg";
-import recipeAppPreview from "@/assets/recipe-app-preview.jpg";
 
 const projects = [
   {
@@ -14,18 +13,6 @@ const projects = [
     metrics: ["< 50ms latency", "Multi-user scalable", "Secure JWT auth"],
     timeline: "Apr 2025 – May 2025",
     image: chatAppPreview,
-    github: "https://github.com/varshith3555",
-    demo: "#",
-  },
-  {
-    title: "Recipe Platform",
-    description:
-      "Built a scalable recipe management platform where users can browse, add, and save recipes dynamically. Optimized rendering using React Hooks and implemented lazy loading for improved performance.",
-    tech: ["HTML", "CSS", "React.js"],
-    features: ["Recipe browsing", "Search and filtering", "Responsive UI", "Lazy loading optimization"],
-    metrics: ["60% faster rendering", "Optimized performance", "Responsive design"],
-    timeline: "Nov 2024 – Dec 2024",
-    image: recipeAppPreview,
     github: "https://github.com/varshith3555",
     demo: "#",
   },
@@ -56,7 +43,7 @@ const ProjectsSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1 + i * 0.15 }}
-              className="glass-card overflow-hidden group cursor-default"
+              className="glass-card overflow-hidden group cursor-default max-w-5xl mx-auto"
             >
               <div className="grid md:grid-cols-2">
                 {/* Image */}
