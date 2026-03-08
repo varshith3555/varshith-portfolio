@@ -19,8 +19,9 @@ const SkillsSection = () => {
     <section id="skills" ref={ref} className="relative">
       {/* Background glow effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-20 right-0 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 -left-20 w-[400px] h-[400px] bg-accent/[0.04] rounded-full blur-[100px]" />
+        <div className="absolute -top-20 right-0 w-[600px] h-[600px] bg-primary/[0.06] rounded-full blur-[140px]" />
+        <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] bg-accent/[0.05] rounded-full blur-[140px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/[0.03] rounded-full blur-[160px]" />
       </div>
 
       <div className="section-container relative z-10">

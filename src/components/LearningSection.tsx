@@ -14,7 +14,10 @@ const LearningSection = () => {
 
   return (
     <section ref={ref} className="relative">
-      <div className="section-container !py-12">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-primary/[0.03] rounded-full blur-[120px]" />
+      </div>
+      <div className="section-container !py-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

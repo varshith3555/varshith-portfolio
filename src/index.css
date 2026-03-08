@@ -89,11 +89,23 @@
   }
 
   .section-divider {
-    background: linear-gradient(to bottom, hsl(var(--background)), hsla(217, 92%, 60%, 0.03), hsl(var(--background)));
-    height: 120px;
-    margin-top: -60px;
-    margin-bottom: -60px;
+    background: linear-gradient(to bottom, hsl(var(--background)), hsla(217, 92%, 60%, 0.04), hsl(var(--background)));
+    height: 140px;
+    margin-top: -70px;
+    margin-bottom: -70px;
     pointer-events: none;
+    position: relative;
+  }
+
+  .section-divider::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, hsla(217, 92%, 60%, 0.12), transparent);
   }
 
   .gradient-text {
