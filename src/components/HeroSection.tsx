@@ -187,8 +187,8 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.9 + i * 0.08 }}
-              whileHover={{ scale: 1.1, y: -2 }}
-              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg`}
+              whileHover={{ scale: 1.15, y: -4, boxShadow: "0 0 20px hsla(217,92%,60%,0.4)" }}
+              className={`text-xs px-3 py-1.5 rounded-full bg-gradient-to-r ${tech.color} text-primary-foreground font-medium cursor-default shadow-lg transition-[transform,box-shadow] duration-200 ease-out`}
             >
               {tech.name}
             </motion.span>
