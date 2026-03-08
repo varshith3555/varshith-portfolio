@@ -56,26 +56,26 @@ const ProjectsSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 + i * 0.2 }}
-              whileHover={{ y: -4 }}
-              className="glass-card overflow-hidden group hover:border-primary/30 transition-all duration-500 hover:shadow-[0_0_60px_hsla(217,92%,60%,0.12)]"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card overflow-hidden group hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_60px_hsla(217,92%,60%,0.2)]"
             >
               <div className="grid md:grid-cols-2">
                 {/* Image */}
                 <div className="relative overflow-hidden aspect-video md:aspect-auto">
-                  <motion.img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ duration: 0.6 }}
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent md:bg-gradient-to-r" />
+                  <div className="w-full h-full overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/10 md:bg-gradient-to-r md:from-background md:via-background/50 md:to-background/10" />
                   
                   {/* Metrics overlay */}
                   <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2">
                     {project.metrics.map((m) => (
-                      <span key={m} className="text-[10px] px-2 py-1 rounded-full bg-primary/20 text-primary backdrop-blur-md border border-primary/20 flex items-center gap-1">
+                      <span key={m} className="text-[10px] px-2.5 py-1 rounded-full bg-background/80 text-primary backdrop-blur-md border border-primary/30 flex items-center gap-1 font-medium shadow-lg">
                         <Zap size={8} /> {m}
                       </span>
                     ))}
