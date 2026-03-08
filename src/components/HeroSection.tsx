@@ -230,7 +230,8 @@ const HeroSection = () => {
           </a>
           <a
             href="/Varshith_Reddy_FullStack_Developer_Resume.pdf"
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm border border-border text-foreground hover:bg-secondary hover:border-primary/30 hover:scale-105 hover:-translate-y-1 hover:shadow-[0_8px_25px_hsla(217,92%,60%,0.15)] active:scale-[0.98] active:translate-y-0"
             style={{ transition: "transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease" }}
           >
