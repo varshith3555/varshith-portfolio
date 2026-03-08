@@ -1,16 +1,38 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Github, ExternalLink, GitCommit, Star, GitFork } from "lucide-react";
 
-const githubStats = [
-  { icon: GitCommit, label: "Total Commits", value: "200+" },
-  { icon: Star, label: "Repositories", value: "10+" },
-  { icon: GitFork, label: "Contributions", value: "50+" },
-];
+interface GitHubData {
+  publicRepos: number;
+  followers: number;
+  totalCommits: string;
+}
 
 const GitHubSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const [ghData, setGhData] = useState<GitHubData>({ publicRepos: 0, followers: 0, totalCommits: "200+" });
+
+  useEffect(() => {
+    fetch("https://api.github.com/users/varshith3555")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.public_repos !== undefined) {
+          setGhData({
+            publicRepos: data.public_repos,
+            followers: data.followers,
+            totalCommits: "200+",
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const stats = [
+    { icon: GitCommit, label: "Total Commits", value: ghData.totalCommits },
+    { icon: Star, label: "Public Repos", value: String(ghData.publicRepos || "10+") },
+    { icon: GitFork, label: "Followers", value: String(ghData.followers || "5+") },
+  ];
 
   return (
     <section id="github" ref={ref}>
@@ -33,14 +55,14 @@ const GitHubSection = () => {
           transition={{ delay: 0.15 }}
           className="grid grid-cols-3 gap-4 mb-8"
         >
-          {githubStats.map((stat, i) => (
+          {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.2 + i * 0.1 }}
               whileHover={{ y: -3 }}
-              className="glass-card p-4 text-center hover:border-primary/30 transition-all duration-300 hover:shadow-[var(--shadow-glow)]"
+              className="glass-card p-4 text-center hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsla(217,92%,60%,0.15)]"
             >
               <stat.icon size={20} className="text-primary mx-auto mb-2" />
               <div className="text-xl font-bold font-display gradient-text">{stat.value}</div>
@@ -56,7 +78,7 @@ const GitHubSection = () => {
           className="grid gap-6"
         >
           {/* Contribution graph */}
-          <div className="glass-card p-6 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[var(--shadow-glow)]">
+          <div className="glass-card p-6 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsla(217,92%,60%,0.15)]">
             <h3 className="text-sm font-semibold mb-4 flex items-center gap-2">
               <Github size={16} className="text-primary" /> Contribution Graph
             </h3>
@@ -68,21 +90,21 @@ const GitHubSection = () => {
             />
           </div>
 
-          {/* Stats cards with dark theme params */}
+          {/* Profile Summary Cards */}
           <div className="grid sm:grid-cols-2 gap-6">
-            <motion.div whileHover={{ y: -3 }} className="glass-card p-3 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[var(--shadow-glow)]">
+            <motion.div whileHover={{ y: -3 }} className="glass-card p-4 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsla(217,92%,60%,0.15)]">
               <img
-                src="https://github-readme-stats.vercel.app/api?username=varshith3555&show_icons=true&theme=dark&bg_color=0d1117&hide_border=true&title_color=6B8AFF&text_color=9CA3AF&icon_color=A78BFA&ring_color=6B8AFF"
+                src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=varshith3555&theme=tokyonight"
                 alt="GitHub Stats"
-                className="w-full"
+                className="w-full rounded-lg"
                 loading="lazy"
               />
             </motion.div>
-            <motion.div whileHover={{ y: -3 }} className="glass-card p-3 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[var(--shadow-glow)]">
+            <motion.div whileHover={{ y: -3 }} className="glass-card p-4 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_hsla(217,92%,60%,0.15)]">
               <img
-                src="https://github-readme-stats.vercel.app/api/top-langs/?username=varshith3555&layout=compact&theme=dark&bg_color=0d1117&hide_border=true&title_color=6B8AFF&text_color=9CA3AF"
+                src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=varshith3555&theme=tokyonight"
                 alt="Top Languages"
-                className="w-full"
+                className="w-full rounded-lg"
                 loading="lazy"
               />
             </motion.div>

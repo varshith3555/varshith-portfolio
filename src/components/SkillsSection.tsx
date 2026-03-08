@@ -6,62 +6,32 @@ const skillCategories = [
   {
     title: "Programming Languages",
     icon: Code2,
-    skills: [
-      { name: "Java", level: 85 },
-      { name: "C#", level: 80 },
-    ],
+    skills: ["Java", "C#"],
   },
   {
     title: "Frontend",
     icon: Layout,
-    skills: [
-      { name: "HTML", level: 90 },
-      { name: "CSS", level: 85 },
-      { name: "JavaScript", level: 88 },
-      { name: "React.js", level: 85 },
-    ],
+    skills: ["HTML", "CSS", "JavaScript", "React.js"],
   },
   {
     title: "Backend",
     icon: Server,
-    skills: [
-      { name: "ASP.NET Core MVC", level: 80 },
-      { name: "ASP.NET Core Web API", level: 82 },
-      { name: "Entity Framework Core", level: 78 },
-      { name: "ADO.NET", level: 75 },
-      { name: "LINQ", level: 76 },
-      { name: "Node.js", level: 82 },
-      { name: "Express.js", level: 80 },
-    ],
+    skills: ["ASP.NET Core MVC", "ASP.NET Core Web API", "Entity Framework Core", "ADO.NET", "LINQ", "Node.js", "Express.js"],
   },
   {
     title: "Databases",
     icon: Database,
-    skills: [
-      { name: "SQL Server", level: 80 },
-      { name: "MongoDB", level: 78 },
-    ],
+    skills: ["SQL Server", "MongoDB"],
   },
   {
     title: "Tools & Platforms",
     icon: Wrench,
-    skills: [
-      { name: "Git", level: 88 },
-      { name: "GitHub", level: 90 },
-      { name: "Swagger", level: 75 },
-      { name: "AWS", level: 65 },
-      { name: "Jira", level: 70 },
-    ],
+    skills: ["Git", "GitHub", "Swagger", "AWS", "Jira"],
   },
   {
     title: "Soft Skills",
     icon: Users,
-    skills: [
-      { name: "Problem Solving", level: 90 },
-      { name: "Communication", level: 85 },
-      { name: "Leadership", level: 85 },
-      { name: "Teamwork", level: 90 },
-    ],
+    skills: ["Problem Solving", "Communication", "Leadership", "Teamwork"],
   },
 ];
 
@@ -91,7 +61,7 @@ const SkillsSection = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1 + i * 0.1 }}
               whileHover={{ y: -5 }}
-              className="glass-card p-6 hover:border-primary/30 transition-all duration-300 group hover:shadow-[var(--shadow-glow)]"
+              className="glass-card p-6 hover:border-primary/30 transition-all duration-300 group hover:shadow-[0_0_30px_hsla(217,92%,60%,0.15)]"
             >
               <div className="flex items-center gap-3 mb-5">
                 <motion.div
@@ -102,24 +72,15 @@ const SkillsSection = () => {
                 </motion.div>
                 <h3 className="font-semibold font-display text-sm">{cat.title}</h3>
               </div>
-              <div className="space-y-3">
+              <div className="flex flex-wrap gap-2">
                 {cat.skills.map((skill) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors">
-                        {skill.name}
-                      </span>
-                      <span className="text-[10px] text-primary font-mono">{skill.level}%</span>
-                    </div>
-                    <div className="h-1.5 rounded-full bg-secondary overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-                        transition={{ duration: 1, delay: 0.3 + i * 0.1, ease: "easeOut" }}
-                        className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
-                      />
-                    </div>
-                  </div>
+                  <motion.span
+                    key={skill}
+                    whileHover={{ scale: 1.08, y: -2 }}
+                    className="text-xs px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground border border-border/50 hover:border-primary/40 hover:text-primary hover:shadow-[0_0_12px_hsla(217,92%,60%,0.2)] transition-all duration-200 cursor-default"
+                  >
+                    {skill}
+                  </motion.span>
                 ))}
               </div>
             </motion.div>
